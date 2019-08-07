@@ -2,7 +2,42 @@ from rest_framework import generics
 
 from . import models
 from . import serializers
+import json
+from django.shortcuts import render
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from . serializers import StartSerializer
+from . models import Start,Random_No
+from django.http import HttpResponse
+
+from django.utils.crypto import get_random_string
 
 class QuestionListView(generics.ListCreateAPIView):
     queryset = models.Question.objects.all()
     serializer_class = serializers.QuestionListView
+
+
+@api_view(['GET', 'POST'])
+def start(request):
+    if request.method == 'GET':
+        ready=Start.objects.all()
+        serializer = StartSerializer(ready,many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = StartSerializer(data=request.data)
+        if serializer.is_valid():
+            # name=serializer.data.get('name')
+            # student_no=serializer.data.get('student_no')
+            # return Response({'message':message})
+            serializer.save()
+            return Response(serializer.data,status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
+def generate(request):
+    for i in range(10):
+        unique_id=Random_No()
+        unique_id.random = get_random_string(length=8)
+        unique_id.save()
+    return HttpResponse("hello world")
