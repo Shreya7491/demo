@@ -20,8 +20,19 @@ class Random_No(models.Model):
 
 class Start(models.Model):
     name=models.CharField(max_length=255)
-    student_no = models.IntegerField(unique=True)
+    student_no = models.IntegerField(primary_key=True,unique=True)
     normal = models.OneToOneField('Random_No',on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
+
+class Identify(models.Model):
+    sequence = models.ForeignKey('Question',on_delete=models.CASCADE)
+    roll_no = models.ForeignKey('Start',on_delete=models.CASCADE)
+    answer = models.CharField(max_length=20)
+
+
+
+class Show(models.Model):
+    studentno = models.ForeignKey('Start',on_delete=models.CASCADE)
+    result = models.IntegerField(blank=False)

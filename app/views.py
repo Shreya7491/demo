@@ -7,8 +7,8 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from . serializers import StartSerializer
-from . models import Start,Random_No
+from . serializers import StartSerializer,IdentifySerializer,ShowSerializer
+from . models import Start,Random_No,Identify,Show
 from django.http import HttpResponse
 
 from django.utils.crypto import get_random_string
@@ -41,3 +41,37 @@ def generate(request):
         unique_id.random = get_random_string(length=8)
         unique_id.save()
     return HttpResponse("hello world")
+
+@api_view(['GET', 'POST'])
+def identify(request):
+    if request.method == 'GET':
+        ready=Identify.objects.all()
+        serializer = IdentifySerializer(ready,many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = IdentifySerializer(data=request.data)
+        if serializer.is_valid():
+            # name=serializer.data.get('name')
+            # student_no=serializer.data.get('student_no')
+            # return Response({'message':message})
+            serializer.save()
+            return Response(serializer.data,status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'POST'])
+def show(request):
+    if request.method == 'GET':
+        ready=Show.objects.all()
+        serializer = ShowSerializer(ready,many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = ShowSerializer(data=request.data)
+        if serializer.is_valid():
+            # name=serializer.data.get('name')
+            # student_no=serializer.data.get('student_no')
+            # return Response({'message':message})
+            serializer.save()
+            return Response(serializer.data,status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
