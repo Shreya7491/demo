@@ -8,7 +8,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from . serializers import StartSerializer,IdentifySerializer,ShowSerializer
-from . models import Start,Random_No,Identify,Show
+from . models import Start,Random_No,Identify,Show, Random
 from django.http import HttpResponse
 
 from django.utils.crypto import get_random_string
@@ -41,6 +41,14 @@ def generate(request):
         unique_id.random = get_random_string(length=8)
         unique_id.save()
     return HttpResponse("hello world")
+
+def generateshow(request):
+    for i in range(10):
+        unique=Random()
+        unique.random_no = get_random_string(length=6)
+        unique.save()
+    return HttpResponse("hello world show")
+
 
 @api_view(['GET', 'POST'])
 def identify(request):

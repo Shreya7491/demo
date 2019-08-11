@@ -15,7 +15,7 @@ class StartSerializer(serializers.ModelSerializer):
 class ShowSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Show
-        fields = ('studentno','result')
+        fields = ('studentno','result','random_string')
 
 class IdentifySerializer(serializers.ModelSerializer):
     class Meta:

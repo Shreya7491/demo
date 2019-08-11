@@ -31,8 +31,12 @@ class Identify(models.Model):
     roll_no = models.ForeignKey('Start',on_delete=models.CASCADE)
     answer = models.CharField(max_length=20)
 
-
+class Random(models.Model):
+    random_no  = models.CharField(primary_key=True,max_length=255)
+    def __str__(self):
+        return self.random_no
 
 class Show(models.Model):
     studentno = models.ForeignKey('Start',on_delete=models.CASCADE)
     result = models.IntegerField(blank=False)
+    random_string = models.OneToOneField('Random',on_delete=models.CASCADE,default='dealdone')

@@ -8,5 +8,6 @@ urlpatterns = [
     path('generate/', views.generate),
     path('show/', views.show),
     path('identify/', views.identify),
+    path('generateshow/',views.generateshow),
 
 ]
