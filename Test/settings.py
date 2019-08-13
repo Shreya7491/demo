@@ -30,10 +30,10 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-# CORS_ORIGIN_ALLOW_ALL = True
-CORS_ORIGIN_WHITELIST = (
-    'https://cloud-test.in',
-)
+CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ORIGIN_WHITELIST = (
+#     'https://cloud-test.in',
+# )
 
 INSTALLED_APPS = [
     'django.contrib.admin',
