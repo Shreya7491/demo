@@ -37,6 +37,6 @@ class Random(models.Model):
         return self.random_no
 
 class Show(models.Model):
-    studentno = models.CharField(max_length=255)
+    studentno = models.ForeignKey('Start',on_delete=models.CASCADE)
     result = models.IntegerField(blank=False)
     random_string = models.OneToOneField('Random',on_delete=models.CASCADE,default='dealdone')
