@@ -19,7 +19,7 @@ django-crontab==0.7.1
 django-heroku==0.3.1
 django-render-block==0.5
 django-templated-email==2.2.0
-djangorestframework==3.9.0
+djangorestframework==3.9.1
 easy-thumbnails==2.5
 googlemaps==3.0.2
 gunicorn==19.9.0
