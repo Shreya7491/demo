@@ -33,7 +33,7 @@ pdfkit==0.6.1
 Pillow==6.2.0
 psycopg2==2.8.3
 pycparser==2.19
-PyJWT==1.6.4
+PyJWT==2.4.0
 PySocks==1.6.8
 python3-openid==3.1.0
 pytz==2018.5
